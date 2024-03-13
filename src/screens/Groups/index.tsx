@@ -1,9 +1,10 @@
-import { Text, View } from "react-native"
+
+import { GroupsContainer, Title } from "./styles"
 
 export const GroupsScreen = () => {
   return (
-    <View>
-      <Text>Groups</Text>
-    </View>
+    <GroupsContainer>
+      <Title>Groups</Title>
+    </GroupsContainer>
   )
 }
