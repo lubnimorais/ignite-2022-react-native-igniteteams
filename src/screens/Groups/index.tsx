@@ -1,10 +1,10 @@
 
-import { GroupsContainer, Title } from "./styles"
+import { GroupsContainer } from "./styles"
 
 export const GroupsScreen = () => {
   return (
     <GroupsContainer>
-      <Title>Groups</Title>
+      
     </GroupsContainer>
   )
 }
