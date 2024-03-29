@@ -10,7 +10,9 @@ interface IIconProps {
   type: IButtonIconTypeStyleProps;
 }
 
-export const ButtonIconContainer = styled(TouchableOpacity)`
+export const ButtonIconContainer = styled(TouchableOpacity).attrs(() => ({
+  activeOpacity: 0.7,
+}))`
   width: 56px;
   height: 56px;
 
