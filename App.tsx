@@ -8,7 +8,7 @@ import {
 
 import { ThemeProvider } from 'styled-components';
 
-import { NewGroupScreen } from '@screens/NewGroup';
+import { PlayersScreen } from '@screens/Players';
 
 import { Loading } from '@components/Loading';
 
@@ -25,7 +25,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <NewGroupScreen /> : <Loading />}
+      {fontsLoaded ? <PlayersScreen /> : <Loading />}
     </ThemeProvider>
   );
 }
