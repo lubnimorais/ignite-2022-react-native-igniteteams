@@ -8,7 +8,7 @@ import {
 
 import { ThemeProvider } from 'styled-components';
 
-import { PlayersScreen } from '@screens/Players';
+import { Routes } from './src/routes';
 
 import { Loading } from '@components/Loading';
 
@@ -25,7 +25,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <PlayersScreen /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }
