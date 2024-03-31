@@ -1,5 +1,8 @@
 import { useState } from 'react';
+
 import { FlatList } from 'react-native';
+
+import { useRoute } from '@react-navigation/native';
 
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
@@ -8,30 +11,26 @@ import { Input } from '@components/Input';
 import { Filter } from '@components/Filter';
 import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
+import { Button } from '@components/Buttons';
 
 import { Form, HeaderList, NumberOfPlayers, PlayersContainer } from './styles';
-import { Button } from '@components/Buttons';
+
+interface IPlayerRouteParams {
+  group: string;
+}
 
 export function PlayersScreen() {
   const [team, setTeam] = useState('Time A');
-  const [players, setPlayers] = useState([
-    'Lubni',
-    'Rodrigo',
-    'Jake',
-    'Diegão',
-    'Dani',
-    'Biro',
-    'Alura',
-  ]);
+  const [players, setPlayers] = useState([]);
+
+  const route = useRoute();
+  const { group } = route.params as IPlayerRouteParams;
 
   return (
     <PlayersContainer>
       <Header showBackButton />
 
-      <Highlight
-        title="Nome da turma"
-        subtitle="adicione a galera e separa os times"
-      />
+      <Highlight title={group} subtitle="adicione a galera e separa os times" />
 
       <Form>
         <Input placeholder="Nome da pessoa" autoCorrect={false} />
