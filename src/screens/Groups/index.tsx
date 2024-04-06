@@ -2,7 +2,9 @@ import { useCallback, useState } from 'react';
 
 import { FlatList } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+
+import { groupGetAll } from '@storage/group/groupsGetAll';
 
 import { Header } from '@components/Header';
 import { GroupCard } from '@components/GroupCard';
@@ -18,10 +20,35 @@ export function GroupsScreen() {
   const navigation = useNavigation();
 
   // FUNCTIONS
+  const fetchGroups = useCallback(async () => {
+    try {
+      const data = await groupGetAll();
+
+      setGroups(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   const handleNewGroupNavigation = useCallback(() => {
     navigation.navigate('newGroups');
   }, [navigation]);
+
+  const handleShowGroupNavigation = useCallback(
+    (group: string) => {
+      navigation.navigate('players', { group });
+    },
+    [navigation],
+  );
   // END FUNCTIONS
+
+  // USE EFFECT
+  useFocusEffect(
+    useCallback(() => {
+      fetchGroups();
+    }, [fetchGroups]),
+  );
+  // END USE EFFECT
 
   return (
     <GroupsContainer>
@@ -32,7 +59,14 @@ export function GroupsScreen() {
       <FlatList
         data={groups}
         keyExtractor={(item) => item}
-        renderItem={({ item: group }) => <GroupCard title={group} />}
+        renderItem={({ item: group }) => (
+          <GroupCard
+            title={group}
+            onPress={() => {
+              handleShowGroupNavigation(group);
+            }}
+          />
+        )}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
         ListEmptyComponent={() => (
           <ListEmpty message="Que tal cadastrar a primeira turma" />
